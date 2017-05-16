@@ -1,8 +1,8 @@
 {
-  "name": "React-Boilerplate",
-  "version": "3.0.0",
-  "description": "React Boilerplate",
-  "main": "boilerplate.js",
+  "name": "Todo-list",
+  "version": "1.0.0",
+  "description": "Todo-list",
+  "main": "todoList.js",
   "scripts": {
     "test": "karma start",
     "start": "node server.js"
@@ -32,7 +32,7 @@
     "karma-webpack": "^1.7.0",
     "mocha": "^2.4.5",
     "node-sass": "^4.5.2",
-    "react-addons-test-utils": "^0.14.6",
+    "react-addons-test-utils": "^0.14.7",
     "sass-loader": "^4.1.1",
     "script-loader": "^0.6.1",
     "style-loader": "^0.13.0",

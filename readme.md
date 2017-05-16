@@ -1,6 +1,7 @@
-<h1>React Boilerplate - version 3.0</h1>
+<h1>Course project - Todo-list</h1>
 
-<p>This is the final boilerplate for The Complete React Web App Developer Course</p>
+<p>This is a project for The Complete React Web App Developer Course</p>
+<p>Since it is built with Foundation, this app is mobile friendly.</p>
 
 <h2>Development</h2>
 <table>

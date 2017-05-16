@@ -1,0 +1,17 @@
+$$$1. spread operator syntax example: <Todo key={todo.id} {...todo}/> (in the TodoList.js file)
+
+$$$2. Why use Array.map() rather than Array.forEach()?
+Array.forEach doesn't do anything with the returned value inside the callback.
+forEach itself always returns undefined, not an array.
+On the other hand, Array.map() turns all the returned values into a new array which is exactly what we want!
+Maps return value is the array of new values.
+
+From the docs for forEach:
+"forEach() executes the callback function once for each array element;
+unlike map() or reduce() it always returns the value undefined and is not chainable.
+The typical use case is to execute side effects at the end of a chain."
+
+$$$3. Arrow functions only implicitly return when using the expression syntax with no curly braces.
+The statements syntax with curly braces does require an explicit return statements.
+
+To see an example - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions
