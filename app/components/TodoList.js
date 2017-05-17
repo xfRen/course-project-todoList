@@ -11,9 +11,9 @@ var TodoList = React.createClass({
       if (typeof todos === 'undefined') {
         return null;
       }
-      return todos.map((todo, index) => {
+      return todos.map((todo) => {
         return (
-          <Todo key={index} {...todo}/>
+          <Todo key={todo.id} {...todo}/>
         );
       });
     };

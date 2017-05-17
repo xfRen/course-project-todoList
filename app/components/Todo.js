@@ -2,7 +2,7 @@ const React = require('react');
 
 var Todo = React.createClass({
   propTypes: {
-    id: React.PropTypes.number,
+    id: React.PropTypes.string.isRequired,
     text: React.PropTypes.string.isRequired
   },
   render: function() {

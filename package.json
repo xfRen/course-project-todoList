@@ -36,6 +36,7 @@
     "sass-loader": "^4.1.1",
     "script-loader": "^0.6.1",
     "style-loader": "^0.13.0",
+    "uuid": "^3.0.1",
     "webpack": "^1.12.13"
   }
 }
