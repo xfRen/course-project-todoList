@@ -9,21 +9,23 @@ describe('Component - AddTodo', function() {
     expect(AddTodo).toExist();
   });
 
-  it('should call handleAddTodo prop with valid data', function() {
+  it('should call onAddTodo prop with valid data', function() {
     const text = 'Check mail';
     var spy = expect.createSpy();
-    var addTodo = TestUtils.renderIntoDocument(<AddTodo handleAddTodo={spy}/>);
+    var addTodo = TestUtils.renderIntoDocument(<AddTodo onAddTodo={spy}/>);
     addTodo.refs.newTodoInput.value = text;
-    var form = ReactDOM.findDOMNode(addTodo);
-    TestUtils.Simulate.submit(form);
+    TestUtils.Simulate.submit(addTodo.refs.form);
+    // This is also working:
+    // var form = ReactDOM.findDOMNode(addTodo);
+    // if ref is not available, use ReactDOM.findDOMNode()
 
     expect(spy).toHaveBeenCalledWith(text);
   });
 
-  it('should not call handleAddTodo prop when invalid input', function() {
+  it('should not call onAddTodo prop when invalid input', function() {
     const text = '';
     var spy = expect.createSpy();
-    var addTodo = TestUtils.renderIntoDocument(<AddTodo handleAddTodo={spy}/>);
+    var addTodo = TestUtils.renderIntoDocument(<AddTodo onAddTodo={spy}/>);
     addTodo.refs.newTodoInput.value = text;
     var form = ReactDOM.findDOMNode(addTodo);
     TestUtils.Simulate.submit(form);
