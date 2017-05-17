@@ -2,7 +2,7 @@ const React = require('react');
 
 var AddTodo = React.createClass({
   propTypes: {
-    handleAddTodo: React.PropTypes.func.isRequired
+    onAddTodo: React.PropTypes.func.isRequired
   },
   render: function() {
     return (
@@ -21,7 +21,7 @@ var AddTodo = React.createClass({
     var newTodoInputRef = this.refs.newTodoInput;
     if (newTodoInputRef.value.length > 0) {
       var text = newTodoInputRef.value;
-      this.props.handleAddTodo(text);
+      this.props.onAddTodo(text);
       newTodoInputRef.value = '';
     } else {
       this.refs.newTodoInput.focus();

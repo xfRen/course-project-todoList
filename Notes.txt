@@ -15,3 +15,13 @@ $$$3. Arrow functions only implicitly return when using the expression syntax wi
 The statements syntax with curly braces does require an explicit return statements.
 
 To see an example - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions
+
+$$$4. Question: why can't we just have this.handleSubmit on the button onClick event instead of having a form and then onSubmit?
+Answer: Form tags are still an important thing to use, we're just switching up how we use it.
+onClick limits how the user can submit the form.
+People using the keyboard and clicking the enter key to submit the form will not able to.
+They'll have to click the button.
+
+Using the form tag with onSubmit opens up a wider range of options and accessibility enhancements.
+I would not reccomend creating a form without a form tag.
+It's use has evolved with the modern web.
