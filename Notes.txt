@@ -25,3 +25,14 @@ They'll have to click the button.
 Using the form tag with onSubmit opens up a wider range of options and accessibility enhancements.
 I would not reccomend creating a form without a form tag.
 It's use has evolved with the modern web.
+
+$$$5. In test.js file, should we use ref or ReactDOM.findDOMNode()?
+From Andrew:
+We previously used "var form = ReactDOM.findDOMNode(...)" to target the form and simulate a submit action.
+We don't need to do that here since we have refs defined on our input fields.
+The refs point directly to the DOM nodes we want to simulate events on.
+That means ReactDOM.findDOMNode(...) is not necessary.
+
+I use jQuery in the tests to allow for more flexible querying of the components DOM.
+You can 100% remove jQuery and use refs,
+I just found it annoying to create all these refs that were only going to be used by my test file.

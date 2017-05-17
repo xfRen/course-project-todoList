@@ -18,7 +18,7 @@ describe('Component - AddTodo', function() {
     // This is also working:
     // var form = ReactDOM.findDOMNode(addTodo);
     // if ref is not available, use ReactDOM.findDOMNode()
-
+    
     expect(spy).toHaveBeenCalledWith(text);
   });
 
