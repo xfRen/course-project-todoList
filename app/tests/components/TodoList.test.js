@@ -14,12 +14,14 @@ describe('Component - TodoList', function() {
   it('should render one Todo component for each todo item', function() {
     var todos = [{
       id: uuid(),
-      text: 'Walk the dog'
+      text: 'Walk the dog',
+      completed: false
     }, {
       id: uuid(),
-      text: 'Clean the yard'
+      text: 'Clean the yard',
+      completed: false
     }];
-    var todoList = TestUtils.renderIntoDocument(<TodoList todos={todos}/>);
+    var todoList = TestUtils.renderIntoDocument(<TodoList todos={todos} onToggle={() => {}}/>);
     var todoComponents = TestUtils.scryRenderedComponentsWithType(todoList, Todo);
     expect(todoComponents.length).toBe(todos.length);
   });

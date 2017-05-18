@@ -36,3 +36,29 @@ That means ReactDOM.findDOMNode(...) is not necessary.
 I use jQuery in the tests to allow for more flexible querying of the components DOM.
 You can 100% remove jQuery and use refs,
 I just found it annoying to create all these refs that were only going to be used by my test file.
+
+$$$6.
+Remember, every time we run webpack we are generating a bundle.js file.
+That bundle.js file contains all the JavaScript we need to run our app.
+It has code we wrote, and it has 3rd party module code we've required.
+
+In this scenario, I would only add the modules actually required on Heroku which would be express.
+Express is used in server.js and is not bundled with our app.
+Everything else gets bundled via webpack and pushed to Heroku.
+
+In lecture 137 we switch the process around and run webpack on the server to see how that would work.
+In that case we would need uuid and our other modules under dependencies, not devDependencies.
+
+$$$7. Why use uuid rather than doing things like this - "id: this.state.todos.length + 1"
+I would just be careful when it comes to deleting todos.
+If I add a todo to an empty array, its id will be 1 (length of 0 plus 1).
+Now lets say I add 4 more, so the ids 1, 2, 3, 4, and 5 are taken.
+If I remove the todo with an id of 2 and try to add another, the id generated is going to be 5 which already exists.
+I'm assuming you're using the same exact code as Spencer was.
+
+I prefer to use node-uuid to generate cryptographically strong ids.
+
+$$$8.
+Regular functions using the function keyword create a new this binding.
+You can keep the parent this binding by defining an arrow function!
+Arrow functions to not create a new this binding
