@@ -62,3 +62,25 @@ $$$8.
 Regular functions using the function keyword create a new this binding.
 You can keep the parent this binding by defining an arrow function!
 Arrow functions to not create a new this binding
+
+$$$9. How would you store images, videos, etc that is not easily converted into string be stored? Like user profile picture.
+Answer: There are a few way you can do this.
+I would reccomend using a service built for files like AWS S3 or the new Firebase storage features.
+When you're working with videos or images in your app (with or without redux)
+you should try to pass around ID as opposed to the entire contents of the file.
+If I want someone to be able to upload a file, I would made a call to the Firebase/AWS API to upload the file.
+I would then get a unique ID back, and that's the string I would store in my database or in localStorage.
+
+$$$10. localStorage does NOT persist between different browsers
+
+$$$11. beforeEach method runs before every test defined in it() method
+
+// beforeEach "a"
+
+// it "a" - will have beforeEach "a" executed before it runs
+
+// describe some group
+
+    // beforeEach "b"
+
+    // it "b" - will have beforeEach "a" and "b" executes before it runs
