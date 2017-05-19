@@ -84,3 +84,16 @@ $$$11. beforeEach method runs before every test defined in it() method
     // beforeEach "b"
 
     // it "b" - will have beforeEach "a" and "b" executes before it runs
+
+$$$12. expect assertions toBe() vs toEqual()
+toBe() compares the value using the tripe equals like so: 1 === 1
+toEqual() compares values using the is-equal library.
+This allows us to check if two arrays or objects are the same.
+
+Try running the following statements. They are all going to result in false.
+
+{} === {};  // false
+[1] === [1];  // false
+
+JavaScript is checking if they are the same object, not two objects/arrays with the same values.
+The is-equal library will compare for values which we want!

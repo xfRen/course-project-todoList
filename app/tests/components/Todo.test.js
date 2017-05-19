@@ -3,6 +3,7 @@ const ReactDOM = require('react-dom');
 const expect = require('expect');
 const TestUtils = require('react-addons-test-utils');
 const uuid = require('uuid');
+const moment = require('moment');
 const Todo = require('Todo');
 
 describe('Component - Todo', function() {
@@ -15,7 +16,9 @@ describe('Component - Todo', function() {
     var todoData = {
       id: id,
       text: 'Test features',
-      completed: false
+      completed: false,
+      createdAt: moment().unix(),
+      completedAt: undefined
     };
     var spy = expect.createSpy();
     var todo = TestUtils.renderIntoDocument(<Todo {...todoData} onToggle={spy}/>);
