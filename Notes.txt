@@ -97,3 +97,40 @@ Try running the following statements. They are all going to result in false.
 
 JavaScript is checking if they are the same object, not two objects/arrays with the same values.
 The is-equal library will compare for values which we want!
+
+$$$13. Keep css attributes in alpha-betical order; make it eary to scan
+
+$$$14. SCSS topic - Naming variables
+Hey Andrew,
+I've noticed that you tend to name variables that define colors with the color name.
+
+$grey: #333;
+$light-grey: #666;
+
+This leads to situations where in order to quickly adapt to clients' or leads' requests
+we resort to change the value of the variables while maintaining the variable names.
+So that we might have a variable $grey that in fact set a color that is totally different than the original.
+
+$grey: teal;
+
+On the other hand, if you will decide to change the variable name from $grey to $teal,
+you will de facto defy the very reason you used a variable in the first place
+because you will have to go throw all your files and change all instances of $grey into $teal.
+
+A better approach is to create variables with a functional name.
+
+$background-color: #333;
+
+If so, it will not matter if we have to dramatically change the color of the variable.
+Whatever color, it will always be the background color.
+
+A similar approach can be used for lightening up a color.
+Instead of $light-grey, I'd prefer the following approach.
+
+$background-color-alt: lighten($background-color, 10%);
+
+That allows for a structure that's easier to manipulate in future,
+might you have to editing its fundamental values drastically.
+
+$$$15. Open this link if you want to move to bootstrap:
+https://www.udemy.com/the-complete-react-web-app-developer-course/learn/v4/questions/1873574

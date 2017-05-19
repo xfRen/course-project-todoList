@@ -6,7 +6,7 @@ var AddTodo = React.createClass({
   },
   render: function() {
     return (
-      <form onSubmit={this.onSubmitHandler} ref='form'>
+      <form onSubmit={this.onSubmitHandler} ref='form' className='container__footer'>
         <div>
           <input type="text" ref="newTodoInput" placeholder="What do you need to do?"/>
         </div>

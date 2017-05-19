@@ -30,4 +30,11 @@ describe('Component - TodoList', function() {
     var todoComponents = TestUtils.scryRenderedComponentsWithType(todoList, Todo);
     expect(todoComponents.length).toBe(todos.length);
   });
+
+  it('should render empty message if no todos', function() {
+    var todos = [];
+    var todoList = TestUtils.renderIntoDocument(<TodoList todos={todos} onToggle={() => {}}/>);
+    var todoComponents = TestUtils.findRenderedDOMComponentWithClass(todoList, 'container__message');
+    expect(todoComponents).toExist();
+  });
 });
