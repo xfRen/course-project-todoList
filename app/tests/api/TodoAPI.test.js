@@ -2,7 +2,7 @@ const expect = require('expect');
 const TodoAPI = require('TodoAPI');
 const uuid = require('uuid');
 
-describe('API - TodoAPI', function() {
+describe('api/TodoAPI', function() {
   beforeEach(function() { // Mocha lifecycle method; it gets called before every test
     localStorage.removeItem('todos');
   });

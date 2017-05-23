@@ -7,7 +7,7 @@ const moment = require('moment');
 const TodoList = require('TodoList');
 const Todo = require('Todo');
 
-describe('Component - TodoList', function() {
+describe('components/TodoList', function() {
   it('should exist', function() {
     expect(TodoList).toExist();
   });

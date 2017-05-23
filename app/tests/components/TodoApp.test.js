@@ -5,7 +5,7 @@ const uuid = require('uuid');
 const moment = require('moment');
 const TodoApp = require('TodoApp');
 
-describe('Component - TodoApp', function() {
+describe('components/TodoApp', function() {
   it('should exist', function() {
     expect(TodoApp).toExist();
   });

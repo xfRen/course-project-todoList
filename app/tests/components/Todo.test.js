@@ -6,7 +6,7 @@ const uuid = require('uuid');
 const moment = require('moment');
 const Todo = require('Todo');
 
-describe('Component - Todo', function() {
+describe('components/Todo', function() {
   it('should exist', function() {
     expect(Todo).toExist();
   });

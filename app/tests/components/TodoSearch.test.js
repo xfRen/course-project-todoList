@@ -3,7 +3,7 @@ const expect = require('expect');
 const TestUtils = require('react-addons-test-utils');
 const TodoSearch = require('TodoSearch');
 
-describe('Component - TodoSearch', function() {
+describe('components/TodoSearch', function() {
   it('should exist', function() {
     expect(TodoSearch).toExist();
   });

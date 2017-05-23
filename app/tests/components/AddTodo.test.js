@@ -4,7 +4,7 @@ const expect = require('expect');
 const TestUtils = require('react-addons-test-utils');
 const AddTodo = require('AddTodo');
 
-describe('Component - AddTodo', function() {
+describe('components/AddTodo', function() {
   it('should exist', function() {
     expect(AddTodo).toExist();
   });
@@ -18,7 +18,7 @@ describe('Component - AddTodo', function() {
     // This is also working:
     // var form = ReactDOM.findDOMNode(addTodo);
     // if ref is not available, use ReactDOM.findDOMNode()
-    
+
     expect(spy).toHaveBeenCalledWith(text);
   });
 
