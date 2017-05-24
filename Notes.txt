@@ -142,3 +142,72 @@ A partial is simply a Sass file named with a leading underscore.
 You might name it something like _partial.scss.
 The underscore lets Sass know that the file is only a partial file and that it should not be generated into a CSS file.
 Sass partials are used with the @import directive.
+
+$$$17. .toBe() vs .toEqual()?
+.toBe() would be a little faster as it uses === and .toEqual() uses a 3rd party library called is-equal.
+I've always preferred toEqual because I don't have to think about what values I'm passing in (object or boolean).
+I can pass in my values and know it'll work as expected.
+
+$$$18. Actions and reducers
+An action only returns a description of what is to be done,
+while a reducer takes that description and calculates
+what the next state should be after applying the action.
+
+The action object doesn't define the state.
+It defines the changes that should be made.
+This might include nothing but a type property.
+It would be unmanageable if every action needed to compute the entire state.
+
+The reducer (or reducers) takes the current state and the action.
+It uses these two to compute and return the new state.
+If we removed reducers, we would still need to compute the state.
+Reducers are a solution to that problem.
+
+$$$19. There is really no reason to deep freeze primitive values (boolean, number) or strings
+as by their very nature they are immutable; These don't need to be passed through deep-freeze-strict.
+This is done out of a habit to freeze everything getting passed into the reducer.
+
+Only Objects (which would include arrays) are passed by reference.
+
+$$$20. Question: Is there a difference between Deep Freeze package and Object.freeze() function?
+Answer: Deep Freeze will recursively freeze all nested functions and objects.
+Object.freeze only freezes top-level properties. For example:
+
+var user = {
+    name: 'Andrew',
+    age: {
+        num: 25
+    }
+};
+var frozenUser = Object.freeze(user);
+
+In the above example, I would not be able to update frozenUser.name
+I would however be able to update frozenUser.age.num without any problems.
+Deep Freeze would not allow someone to update frozenUser.age.num
+
+$$$21. Both spread operator and Object.assign() are shallow copy.
+Link for deep copy vs. shallow copy - https://www.cs.utexas.edu/~scottm/cs307/handouts/deepCopying.htm
+Code example to find out:
+let origOne = {
+  user: {
+    name: "Andrew"
+  }
+}
+let newOne = {};
+Object.assign(newOne, origOne);
+newOne.user.name = "Mike";
+console.log(origOne); // Will print "Mike"
+
+
+let origTwo = {
+  user: {
+    name: "Andrew"
+  }
+}
+let newTwo = { ...origTwo };
+newTwo.user.name = "Mike";
+console.log(origTwo); // Will print "Mike"
+
+$$$22. Modern browsers are adding these features to their JavaScript engines.
+The reason we use babel is to allow our web apps to run on older browsers that don't support them. 
+Babel also allows us to use JSX which is a language extension.
