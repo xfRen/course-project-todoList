@@ -1,4 +1,3 @@
-const TodoAPI = require('TodoAPI');
 const uuid = require('uuid');
 const moment = require('moment');
 
@@ -20,7 +19,7 @@ export var showCompletedReducer = function(showCompleted = false, action) {
   };
 };
 
-export var todosReducer = function(todos = TodoAPI.getTodos(), action) {
+export var todosReducer = function(todos = [], action) {
   switch(action.type) {
     case 'ADD_TODO':
       return [

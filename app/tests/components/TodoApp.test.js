@@ -6,7 +6,7 @@ const uuid = require('uuid');
 const moment = require('moment');
 // const configureStore = require('configureStore');
 import {configure} from 'configureStore';
-const TodoApp = require('TodoApp').default;
+const TodoApp = require('TodoApp');
 const TodoList = require('TodoList').default;
 
 describe('components/TodoApp', function() {

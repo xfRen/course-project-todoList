@@ -1,6 +1,4 @@
 const React = require('react');
-const uuid = require('uuid');
-const moment = require('moment');
 const {connect} = require('react-redux');
 // ES 6 syntax:
 // import TodoList from 'TodoList';
@@ -28,4 +26,4 @@ var TodoApp = React.createClass({
   }
 });
 
-export default connect()(TodoApp);
+module.exports = TodoApp;
