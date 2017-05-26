@@ -1,14 +1,19 @@
 const React = require('react');
-const Todo = require('Todo');
+const {connect} = require('react-redux');
+// ES 6 syntax:
+// import Todo from 'Todo';
+// ES 5 syntax:
+var Todo = require('Todo').default;
 
-var TodoList = React.createClass({
+// We're able to export the connected component by default,
+// and we can still export the unconnected component for testing purposes.
+// the below named export will not be used anywhere but test files
+export var TodoList = React.createClass({
   propTypes: {
-    todos: React.PropTypes.array.isRequired,
-    onToggle: React.PropTypes.func.isRequired
+    todos: React.PropTypes.array.isRequired
   },
   render: function() {
     var {todos} = this.props;
-    var {onToggle} = this.props;
     var renderTodos = function() {
       if (typeof todos === 'undefined') {
         return null;
@@ -20,7 +25,7 @@ var TodoList = React.createClass({
       }
       return todos.map((todo) => {
         return (
-          <Todo key={todo.id} {...todo} onToggle={onToggle}/>
+          <Todo key={todo.id} {...todo}/>
         );
       });
     };
@@ -32,4 +37,20 @@ var TodoList = React.createClass({
   }
 });
 
-module.exports = TodoList;
+// ES 5
+// module.exports = connect(
+//   function(state) {
+//     return {
+//       todos: state.todos
+//     };
+//   }
+// )(TodoList);
+
+// ES6
+export default connect(
+  (state) => {
+    return {
+      todos: state.todos
+    };
+  }
+)(TodoList);

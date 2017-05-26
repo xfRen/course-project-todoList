@@ -209,5 +209,122 @@ newTwo.user.name = "Mike";
 console.log(origTwo); // Will print "Mike"
 
 $$$22. Modern browsers are adding these features to their JavaScript engines.
-The reason we use babel is to allow our web apps to run on older browsers that don't support them. 
+The reason we use babel is to allow our web apps to run on older browsers that don't support them.
 Babel also allows us to use JSX which is a language extension.
+
+$$$23. The process of converting a react app to redux usually goes like this.
+First, pull out most (not all) of the components state into the redux store instead.
+This means creating a few reducers that know how to manage those redux store attributes.
+
+Then you'll want to replace all the prop methods with calls to dispatch.
+Instead of passing a callback from ComponentA to ComponentB to "listen" for an event,
+ComponentB will dispatch an action.
+
+The last step would be to connect() all the component with the data they need to render themselves.
+
+$$$23. About connect()()
+connect() returns a brand new React component, it doesn't alter the component passed in.
+The newly created component injects the state/actions into your component
+(the one passed into the function returned from connect()).
+
+On the first call we're simply providing a set of functions that will be
+used in the new component to determine what state/actions we'd like to use.
+On the second call we're getting back that new react component that's using the function we previously passed in.
+Those functions are used internally to properly render our component.
+
+We do pass in arguments directly to connect in the course to access redux state in a component.
+With connect, the component gets passed as an argument to the function that gets returned from connect.
+
+$$$24. In lecture 137 you'll learn how to run webpack on Heroku.
+This is great because we'll be able to remove bundle.js from our Git repo.
+It will require the non-test dependencies to be under "dependencies".
+devDependencies should have only dependencies required to execute tests, like unit-testing, integrated-testing, etc.
+
+$$$25. module.exports vs export default
+Pre-ES6: In ES5, we have require and we have module.exports.
+
+ES6: In ES6, we have the import and export statement.
+
+I recommend sticking with import and export because it's more flexible than require and module.exports
+For example, it supports defaults as well as named exports. This is not supported with require/module.exports.
+
+Also, do NOT mix import with module.export or mix require with export. They don't work together!
+
+$$$26.
+While you could have multiple stores, there is a Redux FAQ that outlines why this is
+generally not what you want (http://redux.js.org/docs/faq/StoreSetup.html#store-setup-multiple-stores)
+It would be better to create a new reducer instead of a new store.
+
+From the article:
+"The original Flux pattern describes having multiple “stores” in an app, each one holding a different area of domain data.
+This can introduce issues such as needing to have one store “waitFor” another store to update.
+This is not necessary in Redux because the separation between data domains is already
+achieved by splitting a single reducer into smaller reducers.
+
+As with several other questions, it is possible to create multiple distinct Redux stores in a page,
+but the intended pattern is to have only a single store.
+Having a single store enables using the Redux DevTools, makes persisting and rehydrating data simpler,
+and simplifies the subscription logic."
+
+$$$27. When we call connect, we're "connecting" our Redux store to the React component.
+The function passed into connect tells Redux which pieces of information the React component should have access to.
+You could call connect without arguments if you don't need any data from the Redux store.
+You'd just be able to dispatch actions like we do for AddTodo.
+
+$$$28.
+When we export default ... we need to adjust our require statement.
+We can either replace it with an import statement, or we can access the default property that comes back from require.
+Import supports the default export keyword by default. This would be the preferred way to do things.
+
+Either of these options will work:
+
+import AddTodo from 'AddTodo';
+// or
+var AddTodo = require('AddTodo').default;
+
+$$$29. With ES6 imports you can pull off the default and/or the members.
+If you want to grab all the members and store them on the action object, the following import syntax will get that done:
+
+import * as actions from 'actions';
+
+import actions from 'actions'; only grabs the default
+
+For a full list of all the ways import can be used, check out import of MDN:
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import
+
+$$$30. About export + require
+// someModule.js
+export default "val"; // this is called default export
+export var name = "Andrew"; // this is called a named export
+
+// app.js
+var someModule = require('./someModule');
+console.log(someModule === "val"); // Should print true, but it will not
+console.log(someModule.name === "Andrew"); // Should print true
+
+Because we would have needed to grab the default prop; The someModule variable looks like this:
+{
+  "default": "val",
+  "name": "Andrew"
+}
+
+So below code would work:
+// app.js
+var someModule = require('./someModule');
+console.log(someModule.default === "val"); // Should print true
+console.log(someModule.name === "Andrew"); // Should print true
+
+$$$31. Currently there is a limitation of TestUtils:
+it's unable to find components created with the Stateless Functional Components technique.
+If you switch it over to React.createClass the test case will pass.
+
+$$$32.
+Many of the ES6 features we use in this course were not yet supported by major browsers
+(Right now most of them are supported by major browsers).
+This is why we use babel.
+It enables us to use things like arrow functions and ES6 imports/exports in our projects today.
+
+$$$33. With ES6 we now have a single optional default export and as many named exports as we like.
+
+$$$34. TestUtils.renderIntoDocument(<.../>); returns components
+React.findDOMNode(component); returns the corresponding native browser DOM element or you can say the rendered DOM.

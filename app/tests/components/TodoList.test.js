@@ -1,11 +1,12 @@
 const React = require('react');
-const ReactDOM = require('react-dom');
+const {Provider} = require('react-redux');
 const expect = require('expect');
 const TestUtils = require('react-addons-test-utils');
 const uuid = require('uuid');
 const moment = require('moment');
-const TodoList = require('TodoList');
-const Todo = require('Todo');
+import {configure} from 'configureStore';
+import ConnectedTodoList, {TodoList} from 'TodoList';
+import ConnectedTodo, {Todo} from 'Todo';
 
 describe('components/TodoList', function() {
   it('should exist', function() {
@@ -26,14 +27,22 @@ describe('components/TodoList', function() {
       createdAt: moment().unix(),
       completedAt: undefined
     }];
-    var todoList = TestUtils.renderIntoDocument(<TodoList todos={todos} onToggle={() => {}}/>);
-    var todoComponents = TestUtils.scryRenderedComponentsWithType(todoList, Todo);
+    var store = configure({
+      todos: todos
+    });
+    var provider = TestUtils.renderIntoDocument(
+      <Provider store={store}>
+        <ConnectedTodoList/>
+      </Provider>
+    );
+    var todoList = TestUtils.findRenderedComponentWithType(provider, ConnectedTodoList);
+    var todoComponents = TestUtils.scryRenderedComponentsWithType(todoList, ConnectedTodo);
     expect(todoComponents.length).toBe(todos.length);
   });
 
   it('should render empty message if no todos', function() {
     var todos = [];
-    var todoList = TestUtils.renderIntoDocument(<TodoList todos={todos} onToggle={() => {}}/>);
+    var todoList = TestUtils.renderIntoDocument(<TodoList todos={todos}/>);
     var todoComponents = TestUtils.findRenderedDOMComponentWithClass(todoList, 'container__message');
     expect(todoComponents).toExist();
   });
