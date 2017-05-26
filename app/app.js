@@ -14,10 +14,6 @@ store.subscribe(function() {
   TodoAPI.setTodos(state.todos);
 });
 
-// store.dispatch(actions.addTodo('Clean the yard'));
-// store.dispatch(actions.setSearchText('yard'));
-// store.dispatch(actions.toggleShowCompleted());
-
 require('style!css!sass!appSass');
 
 ReactDOM.render(

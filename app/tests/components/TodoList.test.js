@@ -28,6 +28,8 @@ describe('components/TodoList', function() {
       completedAt: undefined
     }];
     var store = configure({
+      showCompleted: false,
+      searchText: '',
       todos: todos
     });
     var provider = TestUtils.renderIntoDocument(
@@ -41,8 +43,13 @@ describe('components/TodoList', function() {
   });
 
   it('should render empty message if no todos', function() {
-    var todos = [];
-    var todoList = TestUtils.renderIntoDocument(<TodoList todos={todos}/>);
+    // var todos = [];
+    var state = {
+      showCompleted: false,
+      searchText: '',
+      todos: []
+    };
+    var todoList = TestUtils.renderIntoDocument(<TodoList {...state}/>);
     var todoComponents = TestUtils.findRenderedDOMComponentWithClass(todoList, 'container__message');
     expect(todoComponents).toExist();
   });
