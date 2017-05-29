@@ -328,3 +328,59 @@ $$$33. With ES6 we now have a single optional default export and as many named e
 
 $$$34. TestUtils.renderIntoDocument(<.../>); returns components
 React.findDOMNode(component); returns the corresponding native browser DOM element or you can say the rendered DOM.
+
+$$$35. React doesn't care where the data gets stored (or if it gets stored at all).
+I use Firebase in this course because we're able to persist our data to a database without creating a back-end.
+You can use PostgreSQL, but you'll need to create a back-end API that your front-end communicates with.
+This could be an HTTP API or a WebSockets API. I'd recommend Node!
+
+$$$36. Chaining is accomplished by having every method return the object the method is defined on.
+That would look like this:
+
+var store = {
+  sell : function() {
+    console.log("Sell an apple");
+    return this;
+  },
+  tax: function() {
+    console.log("No tax");
+    return this;
+  }
+}
+
+store.sell().tax().sell();
+
+This would print:
+
+"Sell an apple"
+"No tax"
+"Sell an apple"
+
+$$$37. CRUD operations: creating, reading, updating, and deleting.
+
+$$$38. All the back end data activity should be kept totally separate from everything else
+so it can be swapped in and out depending on what database we wish to use.
+Here, it appears as if we are tying the app in far too much with Firebase,
+I find this to be a strange decision, and also complicates the extensibility of the app.
+
+$$$39. redux-mock-store is a mock store for testing your redux async action creators and middleware;
+You can use it to test synchronous actions as well.
+Documentation - http://arnaudbenard.com/redux-mock-store/
+
+$$$40. About .catch()
+You have two options for running code when a promise gets rejected.
+
+.then() - Instead of passing one function to then, you can pass two!
+The first function, which is the first argument, will run if the promise is resolved.
+The second function will get called if the promise is rejected.
+When using this pattern there is no need to call .catch().
+
+.catch() - As an alternative .then(), you can chain on a call to .catch().
+Catch takes one function and that function will run if the promise is rejected.
+
+In a basic example both methods will result in similar behavior.
+catch() can be used strategically in a more complex example with multiple promises.
+Take a look at this example http://jsbin.com/sigaviz/edit?js,console (click "run" to run it once). 
+Here catch is defined at the very end of our chain.
+It lets us specify one error function regardless of which promise got reject.
+In this case it just happens to be the first promise that fails.

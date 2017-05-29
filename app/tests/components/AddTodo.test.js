@@ -1,16 +1,18 @@
-const React = require('react');
-const ReactDOM = require('react-dom');
-const expect = require('expect');
-const TestUtils = require('react-addons-test-utils');
-const AddTodo = require('AddTodo').AddTodo;
+import React from 'react';
+import ReactDOM from 'react-dom';
+import expect from 'expect';
+import TestUtils from 'react-addons-test-utils';
+import * as actions from 'actions';
+import {AddTodo} from 'AddTodo';
 
 describe('components/AddTodo', function() {
   it('should exist', function() {
     expect(AddTodo).toExist();
   });
 
-  it('should dispatch an ADD_TODO action with valid data', function() {
+  it('should dispatch an action with valid data', function() {
     const text = 'Check mail';
+    const action = actions.callAddTodo(text);
     var spy = expect.createSpy();
     var addTodo = TestUtils.renderIntoDocument(<AddTodo dispatch={spy}/>);
     addTodo.refs.newTodoInput.value = text;
@@ -19,10 +21,7 @@ describe('components/AddTodo', function() {
     // var form = ReactDOM.findDOMNode(addTodo);
     // if ref is not available, use ReactDOM.findDOMNode()
 
-    expect(spy).toHaveBeenCalledWith({
-      type: 'ADD_TODO',
-      text
-    });
+    expect(spy).toHaveBeenCalledWith(action);
   });
 
   it('should not dispatch an action when invalid input', function() {

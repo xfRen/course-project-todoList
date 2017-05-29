@@ -1,7 +1,7 @@
-const React = require('react');
-const expect = require('expect');
-const TestUtils = require('react-addons-test-utils');
-const {TodoSearch} = require('TodoSearch');
+import React from 'react';
+import expect from 'expect';
+import TestUtils from 'react-addons-test-utils';
+import {TodoSearch} from 'TodoSearch';
 
 describe('components/TodoSearch', function() {
   it('should exist', function() {

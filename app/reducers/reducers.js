@@ -1,5 +1,4 @@
-const uuid = require('uuid');
-const moment = require('moment');
+import moment from 'moment';
 
 export var searchTextReducer = function(searchText = '', action) {
   switch(action.type) {
@@ -24,13 +23,7 @@ export var todosReducer = function(todos = [], action) {
     case 'ADD_TODO':
       return [
         ...todos,
-        {
-          id: uuid(),
-          text: action.text,
-          completed: false,
-          createdAt: moment().unix(),
-          completedAt: undefined
-        }
+        action.todo
       ];
     case 'TOGGLE_TODO':
       return todos.map(function(todo) {

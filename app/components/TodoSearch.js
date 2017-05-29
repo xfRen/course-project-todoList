@@ -1,6 +1,6 @@
-const React = require('react');
-const {connect} = require('react-redux');
-const actions = require('actions');
+import React from 'react';
+import {connect} from 'react-redux';
+import * as actions from 'actions';
 
 export var TodoSearch = React.createClass({
   propTypes: {

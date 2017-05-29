@@ -1,6 +1,6 @@
-const React = require('react');
-const {connect} = require('react-redux');
-const actions = require('actions');
+import React from 'react';
+import {connect} from 'react-redux';
+import * as actions from 'actions';
 
 export var AddTodo = React.createClass({
   propTypes: {
@@ -24,7 +24,7 @@ export var AddTodo = React.createClass({
     var newTodoInputRef = this.refs.newTodoInput;
     if (newTodoInputRef.value.length > 0) {
       var text = newTodoInputRef.value;
-      dispatch(actions.addTodo(text));
+      dispatch(actions.callAddTodo(text));
       newTodoInputRef.value = '';
     } else {
       this.refs.newTodoInput.focus();

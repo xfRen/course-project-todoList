@@ -1,13 +1,12 @@
-const React = require('react');
-const expect = require('expect');
-const {Provider} = require('react-redux');
-const TestUtils = require('react-addons-test-utils');
-const uuid = require('uuid');
-const moment = require('moment');
+import React from 'react';
+import expect from 'expect';
+import {Provider} from 'react-redux';
+import TestUtils from 'react-addons-test-utils';
+import uuid from 'uuid';
 // const configureStore = require('configureStore');
 import {configure} from 'configureStore';
-const TodoApp = require('TodoApp');
-const TodoList = require('TodoList').default;
+import TodoApp from 'TodoApp';
+import TodoList from 'TodoList';
 
 describe('components/TodoApp', function() {
   it('should exist', function() {

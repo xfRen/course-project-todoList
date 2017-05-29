@@ -1,9 +1,9 @@
-const React = require('react');
-const ReactDOM = require('react-dom');
-const expect = require('expect');
-const TestUtils = require('react-addons-test-utils');
-const uuid = require('uuid');
-const moment = require('moment');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import expect from 'expect';
+import TestUtils from 'react-addons-test-utils';
+import uuid from 'uuid';
+import moment from 'moment';
 // We want to access our named export "Todo".
 // This is the Todo component that's not wired up with connect.
 // This allows us to test the component by injecting our own props and dispatch spy.

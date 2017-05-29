@@ -1,12 +1,14 @@
-const React = require('react');
-const ReactDOM = require('react-dom');
-const {Provider} = require('react-redux');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {Provider} from 'react-redux';
 
-const TodoApp = require('TodoApp');
-const TodoAPI = require('TodoAPI');
+import TodoApp from 'TodoApp';
+import TodoAPI from 'TodoAPI';
 
-const configureStore = require('configureStore');
+import {configure} from 'configureStore';
 require('style!css!sass!appSass');
+
+// import './../playground/firebase/index';
 
 // The below solution would be fine for now.
 // This is because our data is stored in localStorage and can be accessed via a synchronous API.
@@ -16,7 +18,7 @@ require('style!css!sass!appSass');
 // It would be a bad idea to wait for the data before creating the store and rendering the React app.
 // The bulk add option makes that scenario much easier to manage. You simply bulk add the todos whenever firebase responds.
 var initialTodos = TodoAPI.getTodos();
-var store = configureStore.configure({todos: initialTodos});
+var store = configure({todos: initialTodos});
 
 store.subscribe(function() {
   var state = store.getState();

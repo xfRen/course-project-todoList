@@ -1,8 +1,8 @@
-const expect = require('expect');
-const df = require('deep-freeze-strict');
-const uuid = require('uuid');
-const moment = require('moment');
-const reducers = require('reducers');
+import expect from 'expect';
+import df from 'deep-freeze-strict';
+import uuid from 'uuid';
+import moment from 'moment';
+import * as reducers from 'reducers';
 
 describe('reducers/reducers', function() {
   describe('searchTextReducer', function() {
@@ -31,11 +31,17 @@ describe('reducers/reducers', function() {
     it('should add new todo', function() {
       var action = {
         type: 'ADD_TODO',
-        text: 'Feed QiuQiu'
+        todo: {
+          id: uuid(),
+          text: 'Feed QiuQiu',
+          completed: false,
+          createdAt: moment().unix(),
+          completedAt: undefined
+        }
       };
       var response = reducers.todosReducer(df([]), df(action));
       expect(response.length).toBe(1);
-      expect(response[0].text).toBe(action.text);
+      expect(response[0]).toEqual(action.todo);
     });
 
     it('should toggle todo', function() {

@@ -1,11 +1,11 @@
-const React = require('react');
-const {connect} = require('react-redux');
+import React from 'react';
+import {connect} from 'react-redux';
 // ES 6 syntax:
 // import TodoList from 'TodoList';
 // ES 5 syntax
-var TodoList = require('TodoList').default;
-const AddTodo = require('AddTodo').default;
-const TodoSearch = require('TodoSearch').default;
+import TodoList from 'TodoList';
+import AddTodo from 'AddTodo';
+import TodoSearch from 'TodoSearch';
 
 var TodoApp = React.createClass({
   render: function() {

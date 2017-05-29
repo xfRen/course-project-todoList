@@ -1,7 +1,7 @@
-const React = require('react');
-const {connect} = require('react-redux');
-const moment = require('moment');
-const actions = require('actions');
+import React from 'react';
+import {connect} from 'react-redux';
+import moment from 'moment';
+import * as actions from 'actions';
 // the below named export will not be used anywhere but test files
 export var Todo = React.createClass({
   propTypes: {
