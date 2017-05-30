@@ -16,7 +16,7 @@ export var Todo = React.createClass({
     // connect give component access to dispatch function, which is indeed a real prop.
     var {id, text, completed, createdAt, completedAt, dispatch} = this.props;
     var todoClassName = completed ? 'todo todo-completed' : 'todo';
-    var renderDate = function() {
+    var renderDate = () => {
       var message = 'Created ';
       var timestamp = createdAt;
       if (completed) {
@@ -27,7 +27,7 @@ export var Todo = React.createClass({
     };
     return (
       <div className={todoClassName} onClick={() => {
-          dispatch(actions.toggleTodo(id));
+          dispatch(actions.callToggleTodo(id, !completed));
         }}>
         <div>
           <input type='checkbox' checked={completed} onChange={() => {}}/>

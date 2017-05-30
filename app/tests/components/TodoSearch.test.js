@@ -3,12 +3,12 @@ import expect from 'expect';
 import TestUtils from 'react-addons-test-utils';
 import {TodoSearch} from 'TodoSearch';
 
-describe('components/TodoSearch', function() {
-  it('should exist', function() {
+describe('components/TodoSearch', () => {
+  it('should exist', () => {
     expect(TodoSearch).toExist();
   });
 
-  it('should dispatch a setSearchText action with entered input text', function() {
+  it('should dispatch a setSearchText action with entered input text', () => {
     var spy = expect.createSpy();
     var todoSearch = TestUtils.renderIntoDocument(<TodoSearch dispatch={spy}/>);
     var searchText = 'dog';
@@ -20,7 +20,7 @@ describe('components/TodoSearch', function() {
     });
   });
 
-  it('should toggle showCompleted', function() {
+  it('should toggle showCompleted', () => {
     var spy = expect.createSpy();
     var todoSearch = TestUtils.renderIntoDocument(<TodoSearch dispatch={spy}/>);
     TestUtils.Simulate.change(todoSearch.refs.showCompleted);

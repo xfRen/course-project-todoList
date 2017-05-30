@@ -20,7 +20,7 @@ require('style!css!sass!appSass');
 var initialTodos = TodoAPI.getTodos();
 var store = configure({todos: initialTodos});
 
-store.subscribe(function() {
+store.subscribe(() => {
   var state = store.getState();
   TodoAPI.setTodos(state.todos);
   // console.log('Updated state', state);

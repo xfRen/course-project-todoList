@@ -11,18 +11,20 @@ import moment from 'moment';
 // const {Todo} = require('Todo');
 // ES 6 syntax:
 import {Todo} from 'Todo';
+import * as actions from 'actions';
 
-describe('components/Todo', function() {
-  it('should exist', function() {
+describe('components/Todo', () => {
+  it('should exist', () => {
     expect(Todo).toExist();
   });
 
-  it('should dispatch TOGGLE_TODO action on click', function() {
+  it('should dispatch callToggleTodo action on click', () => {
     var id = uuid();
+    var completed = false;
     var todoData = {
       id: id,
       text: 'Test features',
-      completed: false,
+      completed,
       createdAt: moment().unix(),
       completedAt: undefined
     };
@@ -30,9 +32,7 @@ describe('components/Todo', function() {
     var todo = TestUtils.renderIntoDocument(<Todo {...todoData} dispatch={spy}/>);
     var div = ReactDOM.findDOMNode(todo);
     TestUtils.Simulate.click(div);
-    expect(spy).toHaveBeenCalledWith({
-      type: 'TOGGLE_TODO',
-      id: id
-    });
+    var expectedAction = actions.callToggleTodo(id, !completed);
+    expect(spy).toHaveBeenCalledWith(expectedAction);
   });
 });

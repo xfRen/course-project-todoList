@@ -380,7 +380,28 @@ Catch takes one function and that function will run if the promise is rejected.
 
 In a basic example both methods will result in similar behavior.
 catch() can be used strategically in a more complex example with multiple promises.
-Take a look at this example http://jsbin.com/sigaviz/edit?js,console (click "run" to run it once). 
+Take a look at this example http://jsbin.com/sigaviz/edit?js,console (click "run" to run it once).
 Here catch is defined at the very end of our chain.
 It lets us specify one error function regardless of which promise got reject.
 In this case it just happens to be the first promise that fails.
+
+$$$41. About dispatch and getState on actions return a function:
+These two functions are provided to all "thunked" actions.
+When an action returns a function, that function gets called by Redux with those two arguments.
+
+$$$42. Why we do .catch(done) but not .then(done)?
+Answer: This prevents any errors from ever getting passed into done.
+Calling done with an argument lets you tell Mocha that the async test should be considered a failure.
+By referencing done in the catch promise chain, we're saying "Call this function with any errors that get thrown".
+Mocha uses this argument to generate and show the correct error message in the console.
+That's not what we want in the case of .then().
+
+When we do .then(() => done()); We're calling done with no arguments saying that everything completed successfully.
+
+$$$43. .then(() => {...}).catch(done) vs .then(() => {...}, done)
+The first solution will run the catch error function if the original promise call fails.
+It will also run the catch error handler if a promise rejects anywhere else in the chain.
+This is because catch is chained on after then. It's a "catch all" for errors anywhere in the chain.
+
+The second solution will run the success or error case depending on if the original promise resolves or rejects.
+The error handler will not fire if the success case code throws an error.

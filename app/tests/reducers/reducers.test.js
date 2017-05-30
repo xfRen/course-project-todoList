@@ -4,9 +4,9 @@ import uuid from 'uuid';
 import moment from 'moment';
 import * as reducers from 'reducers';
 
-describe('reducers/reducers', function() {
-  describe('searchTextReducer', function() {
-    it('should set searchText', function() {
+describe('reducers/reducers', () => {
+  describe('searchTextReducer', () => {
+    it('should set searchText', () => {
       var searchText = 'cat';
       var action = {
         type: 'SET_SEARCH_TEXT',
@@ -17,8 +17,8 @@ describe('reducers/reducers', function() {
     });
   });
 
-  describe('searchTextReducer', function() {
-    it('should toggle showCompleted', function() {
+  describe('searchTextReducer', () => {
+    it('should toggle showCompleted', () => {
       var action = {
         type: 'TOGGLE_SHOW_COMPLETED'
       };
@@ -27,8 +27,8 @@ describe('reducers/reducers', function() {
     });
   });
 
-  describe('todosReducer', function() {
-    it('should add new todo', function() {
+  describe('todosReducer', () => {
+    it('should add new todo', () => {
       var action = {
         type: 'ADD_TODO',
         todo: {
@@ -44,7 +44,7 @@ describe('reducers/reducers', function() {
       expect(response[0]).toEqual(action.todo);
     });
 
-    it('should toggle todo', function() {
+    it('should update todo', () => {
       var id = uuid();
       var todos = [
         {
@@ -55,13 +55,18 @@ describe('reducers/reducers', function() {
           completedAt: undefined
         }
       ];
+      var updates = {
+        completed: true,
+        completedAt: moment().unix()
+      };
       var action = {
-        type: 'TOGGLE_TODO',
-        id: id
+        type: 'UPDATE_TODO',
+        id,
+        updates
       };
       var response = reducers.todosReducer(df(todos), df(action));
-      expect(response[0].completed).toBe(true);
-      expect(response[0].completedAt).toNotBe(undefined);
+      expect(response[0]).toInclude(updates);
+      expect(response[0].text).toBe(todos[0].text);
     });
   });
 });

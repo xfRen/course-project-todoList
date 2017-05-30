@@ -2,7 +2,7 @@ import * as redux from 'redux'; // redux doesn't have a default import
 import thunk from 'redux-thunk';
 import {searchTextReducer, showCompletedReducer, todosReducer} from 'reducers';
 
-export var configure = function(initialState = {}) {
+export var configure = (initialState = {}) => {
   var reducer = redux.combineReducers({
     searchText: searchTextReducer,
     showCompleted: showCompletedReducer,

@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-export var searchTextReducer = function(searchText = '', action) {
+export var searchTextReducer = (searchText = '', action) => {
   switch(action.type) {
     case 'SET_SEARCH_TEXT':
       return action.searchText;
@@ -9,7 +9,7 @@ export var searchTextReducer = function(searchText = '', action) {
   };
 };
 
-export var showCompletedReducer = function(showCompleted = false, action) {
+export var showCompletedReducer = (showCompleted = false, action) => {
   switch(action.type) {
     case 'TOGGLE_SHOW_COMPLETED':
       return !showCompleted;
@@ -18,22 +18,20 @@ export var showCompletedReducer = function(showCompleted = false, action) {
   };
 };
 
-export var todosReducer = function(todos = [], action) {
+export var todosReducer = (todos = [], action) => {
   switch(action.type) {
     case 'ADD_TODO':
       return [
         ...todos,
         action.todo
       ];
-    case 'TOGGLE_TODO':
-      return todos.map(function(todo) {
+    case 'UPDATE_TODO':
+      return todos.map((todo) => {
         if (todo.id === action.id) {
           // return a new object so that todo (original object) will not be mutated
-          var updatedCompleted = !todo.completed;
           return {
             ...todo,
-            completed: updatedCompleted,
-            completedAt: updatedCompleted ? moment().unix() : undefined
+            ...action.updates
           };
         }
         return todo;

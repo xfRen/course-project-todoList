@@ -8,12 +8,12 @@ import {configure} from 'configureStore';
 import TodoApp from 'TodoApp';
 import TodoList from 'TodoList';
 
-describe('components/TodoApp', function() {
-  it('should exist', function() {
+describe('components/TodoApp', () => {
+  it('should exist', () => {
     expect(TodoApp).toExist();
   });
 
-  it('should render TodoList', function() {
+  it('should render TodoList', () => {
     // var store = configureStore.configure();
     var store = configure();
     var provider = TestUtils.renderIntoDocument(

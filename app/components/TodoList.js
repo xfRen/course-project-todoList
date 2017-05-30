@@ -44,13 +44,13 @@ export var TodoList = React.createClass({
     var filteredTodos = todos;
     // filter by showCompleted
     if (!showCompleted) {
-      filteredTodos = filteredTodos.filter(function(todo) {
+      filteredTodos = filteredTodos.filter((todo) => {
         return !todo.completed;
       });
     }
     // filter by searchText
     if (typeof searchText === 'string' && searchText.length > 0) {
-      filteredTodos = filteredTodos.filter(function(todo) {
+      filteredTodos = filteredTodos.filter((todo) => {
         var text = todo.text.toLowerCase();
         if (text.indexOf(searchText) !== -1) {
           return true;
@@ -59,7 +59,7 @@ export var TodoList = React.createClass({
       });
     }
     // sort todos with non-completed first
-    filteredTodos.sort(function(a, b) {
+    filteredTodos.sort((a, b) => {
       if (!a.completed && b.completed) {
         return -1; // -1 means a should come before b
       } else if (a.completed && !b.completed) {

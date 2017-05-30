@@ -2,17 +2,17 @@ import expect from 'expect';
 import TodoAPI from 'TodoAPI';
 import uuid from 'uuid';
 
-describe('api/TodoAPI', function() {
-  beforeEach(function() { // Mocha lifecycle method; it gets called before every test
+describe('api/TodoAPI', () => {
+  beforeEach(() => { // Mocha lifecycle method; it gets called before every test
     localStorage.removeItem('todos');
   });
 
-  it('should exist', function() {
+  it('should exist', () => {
     expect(TodoAPI).toExist();
   });
 
-  describe('Function - setTodos', function() {
-    it('should set valid todos array', function() {
+  describe('Function - setTodos', () => {
+    it('should set valid todos array', () => {
       var todos =[{
         id: uuid(),
         text: 'test all files',
@@ -26,20 +26,20 @@ describe('api/TodoAPI', function() {
       // toEqual compare the values on them
     });
 
-    it('should not set invalid todos array', function() {
+    it('should not set invalid todos array', () => {
       var badTodos = {a: 'b'};
       TodoAPI.setTodos(badTodos);
       expect(localStorage.getItem('todos')).toBe(null);
     });
   });
 
-  describe('Function - getTodos', function() {
-    it('should return empty array for bad localStorage data', function() {
+  describe('Function - getTodos', () => {
+    it('should return empty array for bad localStorage data', () => {
       var actualTodos = TodoAPI.getTodos();
       expect(actualTodos).toEqual([]);
     });
 
-    it('should return todos if valid array in localStorage', function() {
+    it('should return todos if valid array in localStorage', () => {
       var todos =[{
         id: uuid(),
         text: 'test all files',

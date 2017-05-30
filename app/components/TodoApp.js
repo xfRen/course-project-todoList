@@ -8,7 +8,7 @@ import AddTodo from 'AddTodo';
 import TodoSearch from 'TodoSearch';
 
 var TodoApp = React.createClass({
-  render: function() {
+  render: () => {
     return (
       <div>
         <h1 className='page-title'>Todo App</h1>

@@ -5,12 +5,12 @@ import TestUtils from 'react-addons-test-utils';
 import * as actions from 'actions';
 import {AddTodo} from 'AddTodo';
 
-describe('components/AddTodo', function() {
-  it('should exist', function() {
+describe('components/AddTodo', () => {
+  it('should exist', () => {
     expect(AddTodo).toExist();
   });
 
-  it('should dispatch an action with valid data', function() {
+  it('should dispatch an action with valid data', () => {
     const text = 'Check mail';
     const action = actions.callAddTodo(text);
     var spy = expect.createSpy();
@@ -24,7 +24,7 @@ describe('components/AddTodo', function() {
     expect(spy).toHaveBeenCalledWith(action);
   });
 
-  it('should not dispatch an action when invalid input', function() {
+  it('should not dispatch an action when invalid input', () => {
     const text = '';
     var spy = expect.createSpy();
     var addTodo = TestUtils.renderIntoDocument(<AddTodo dispatch={spy}/>);

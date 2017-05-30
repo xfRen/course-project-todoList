@@ -21,10 +21,11 @@ export var toggleShowCompleted = () => {
   };
 };
 
-export var toggleTodo = (id) => {
+export var updateTodo = (id, updates) => {
   return {
-    type: 'TOGGLE_TODO',
-    id
+    type: 'UPDATE_TODO',
+    id,
+    updates
   };
 };
 
@@ -40,11 +41,24 @@ export var callAddTodo = (text) => {
       createdAt: moment().unix(),
       completedAt: null
     };
-    return TodoAPI.addTodo(newTodo).then((response) => {
-      dispatch(addTodo(response));
+    return TodoAPI.addTodo(newTodo).then((todo) => {
+      dispatch(addTodo(todo));
     }).catch((error) => {
       if (error) {
-        console.log('The new todo is not added properly.', error);
+        console.log('Error in callAddTodo:', error);
+      }
+    });
+  };
+};
+
+export var callToggleTodo = (id, completed) => {
+  return (dispatch, getState) => {
+    // var state = getState(); // getState() can return the state if called
+    return TodoAPI.updateTodo(id, completed).then((updates) => {
+      dispatch(updateTodo(id, updates));
+    }).catch((error) => {
+      if (error) {
+        console.log('Error in callToggleTodo:', error);
       }
     });
   };
