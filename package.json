@@ -4,19 +4,13 @@
   "description": "Todo-list",
   "main": "todoList.js",
   "scripts": {
-    "test": "karma start",
-    "start": "node server.js"
+    "test": "NODE_ENV=test karma start",
+    "build": "webpack",
+    "start": "npm run build && node server.js"
   },
   "author": "Xiaofei Ren",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.15.2",
-    "firebase": "^4.0.0",
-    "react": "^0.14.7",
-    "react-dom": "^0.14.7",
-    "react-router": "^2.0.0"
-  },
-  "devDependencies": {
     "babel-core": "^6.5.1",
     "babel-loader": "^6.2.2",
     "babel-preset-es2015": "^6.5.0",
@@ -25,19 +19,17 @@
     "css-loader": "^0.23.1",
     "deep-freeze-strict": "^1.1.1",
     "expect": "^1.14.0",
+    "express": "^4.15.2",
+    "firebase": "^4.0.0",
     "foundation-sites": "^6.3.0",
     "jquery": "^2.2.1",
-    "karma": "^0.13.22",
-    "karma-chrome-launcher": "^0.2.2",
-    "karma-mocha": "^0.2.2",
-    "karma-mocha-reporter": "^2.0.0",
-    "karma-sourcemap-loader": "^0.3.7",
-    "karma-webpack": "^1.7.0",
-    "mocha": "^2.4.5",
     "moment": "^2.18.1",
     "node-sass": "^4.5.2",
+    "react": "^0.14.7",
     "react-addons-test-utils": "^0.14.7",
+    "react-dom": "^0.14.7",
     "react-redux": "^5.0.5",
+    "react-router": "^2.0.0",
     "redux": "^3.6.0",
     "redux-mock-store": "^1.2.3",
     "redux-thunk": "^2.2.0",
@@ -46,5 +38,14 @@
     "style-loader": "^0.13.0",
     "uuid": "^3.0.1",
     "webpack": "^1.12.13"
+  },
+  "devDependencies": {
+    "karma": "^0.13.22",
+    "karma-chrome-launcher": "^0.2.2",
+    "karma-mocha": "^0.2.2",
+    "karma-mocha-reporter": "^2.0.0",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-webpack": "^1.7.0",
+    "mocha": "^2.4.5"
   }
 }

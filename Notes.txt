@@ -422,3 +422,20 @@ const thunkCallback = (dispatch, getState) => {
   ...
 };
 return thunkCallback;
+
+$$$46. Question: When to write tests in app development process?
+Answer: There are also processes like test-driven development where the test cases are created first!
+
+I prefer to test the features as I write them. For example:
+
+1. Add new action handler for ADD_NOTE to reducer
+2. Create test case for ADD_NOTE code
+3. Wire it up and test things out on localhost:3000
+4. Commit changes to Git
+
+Sometimes this order doesn't make sense. I often swap steps two and three.
+
+$$$47. For the moment, we only have one database.
+This means our app and our tests run on the same database which is a bad idea for the reason you mentioned above.
+This is temporary.
+In a few videos we'll create a separate test database so our tests don't interfere without our production user data!
