@@ -6,6 +6,7 @@ import TodoApp from 'TodoApp';
 import TodoAPI from 'TodoAPI';
 
 import {configure} from 'configureStore';
+import * as actions from 'actions';
 require('style!css!sass!appSass');
 
 // import './../playground/firebase/index';
@@ -17,14 +18,17 @@ require('style!css!sass!appSass');
 // This is a asynchronous API which means we'll have to wait for the data.
 // It would be a bad idea to wait for the data before creating the store and rendering the React app.
 // The bulk add option makes that scenario much easier to manage. You simply bulk add the todos whenever firebase responds.
-var initialTodos = TodoAPI.getTodos();
-var store = configure({todos: initialTodos});
 
-store.subscribe(() => {
-  var state = store.getState();
-  TodoAPI.setTodos(state.todos);
-  // console.log('Updated state', state);
-});
+// commented to dispatch an asynchronous action
+// var initialTodos = TodoAPI.getTodos();
+// var store = configure({todos: initialTodos});
+var store = configure({});
+store.dispatch(actions.fetchTodos());
+
+// store.subscribe(() => {
+//   var state = store.getState();
+//   TodoAPI.setTodos(state.todos);
+// });
 
 ReactDOM.render(
   <Provider store={store}>

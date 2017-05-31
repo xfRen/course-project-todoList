@@ -29,6 +29,13 @@ export var updateTodo = (id, updates) => {
   };
 };
 
+export var getTodos = (todos) => {
+  return {
+    type: 'GET_TODOS',
+    todos
+  };
+};
+
 //async action
 export var callAddTodo = (text) => {
   // Dispatch is passed in because we configured redux to use the thunk middleware.
@@ -59,6 +66,18 @@ export var callToggleTodo = (id, completed) => {
     }).catch((error) => {
       if (error) {
         console.log('Error in callToggleTodo:', error);
+      }
+    });
+  };
+};
+
+export var fetchTodos = () => {
+  return (dispatch, getState) => {
+    return TodoAPI.getTodos().then((todos) => {
+      dispatch(getTodos(todos));
+    }).catch((error) => {
+      if (error) {
+        console.log('Error in fetchTodos:', error);
       }
     });
   };

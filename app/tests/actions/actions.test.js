@@ -63,9 +63,9 @@ describe('actions/actions', () => {
     const todoText = 'My todo item';
     const action = actions.callAddTodo(todoText);
     store.dispatch(action).then(() => {
-      const actions = store.getActions();
-      expect(actions.length).toBe(1);
-      var actualAction = actions[0];
+      const mockActions = store.getActions();
+      expect(mockActions.length).toBe(1);
+      var actualAction = mockActions[0];
       expect(actualAction).toInclude({
         type: 'ADD_TODO'
       });
@@ -78,16 +78,18 @@ describe('actions/actions', () => {
 
   describe('Tests with firebase todos', () => {
     var testTodoRef;
-
+    var testTodo = {
+      text: 'todo for testing',
+      completed: false,
+      createdAt: moment().unix(),
+      completedAt: null
+    };
     beforeEach((done) => {
-      testTodoRef = firebaseRef.child('todos').push();
-      var testTodo = {
-        text: 'todo for testing',
-        completed: false,
-        createdAt: moment().unix(),
-        completedAt: null
-      };
-      testTodoRef.set(testTodo).then(() => {
+      var todosRef = firebaseRef.child('todos');
+      todosRef.remove().then(() => {
+        testTodoRef = todosRef.push();
+        return testTodoRef.set(testTodo);
+      }).then(() => {
         done();
       }).catch(done);
     });
@@ -104,9 +106,9 @@ describe('actions/actions', () => {
       var completed = true;
       var action = actions.callToggleTodo(id, completed);
       store.dispatch(action).then(() => {
-        const actions = store.getActions();
-        expect(actions.length).toBe(1);
-        var actualAction = actions[0];
+        const mockActions = store.getActions();
+        expect(mockActions.length).toBe(1);
+        var actualAction = mockActions[0];
         expect(actualAction).toInclude({
           type: 'UPDATE_TODO',
           id
@@ -115,6 +117,25 @@ describe('actions/actions', () => {
           completed
         });
         expect(actualAction.updates.completedAt).toExist();
+        done();
+      }).catch(done);
+    });
+
+    it('should populate todos and dispatch GET_TODOS', (done) => {
+      const store = createMockStore({});
+      var action = actions.fetchTodos();
+      store.dispatch(action).then(() => {
+        const mockActions = store.getActions();
+        expect(mockActions.length).toBe(1);
+        var actualAction = mockActions[0];
+        expect(actualAction).toInclude({
+          type: 'GET_TODOS'
+        });
+        var todos = actualAction.todos;
+        expect(todos.length).toBe(1);
+        expect(todos[0]).toInclude({
+          text: 'todo for testing'
+        });
         done();
       }).catch(done);
     });

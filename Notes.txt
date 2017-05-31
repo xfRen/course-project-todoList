@@ -405,3 +405,20 @@ This is because catch is chained on after then. It's a "catch all" for errors an
 
 The second solution will run the success or error case depending on if the original promise resolves or rejects.
 The error handler will not fire if the success case code throws an error.
+
+$$$44. for object / arrays, in most cases use toEqual rather than toBe
+toBe asserts that object is strictly equal to value using ===.
+toEqual compare the values on them
+
+$$$45. To understand the returned function:
+
+// Method one, which is from the course
+return (dispatch, getState) => {
+  ...
+}
+
+// Method two
+const thunkCallback = (dispatch, getState) => {
+  ...
+};
+return thunkCallback;
