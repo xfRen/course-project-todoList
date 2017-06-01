@@ -82,3 +82,23 @@ export var fetchTodos = () => {
     });
   };
 };
+
+export var loginWithGithub = () => {
+  return (dispatch, getState) => {
+    return TodoAPI.loginWithGithub().then((result) => {
+      console.log('Auth worked!', result);
+    }).catch((error) => {
+      console.log('Unable to auth', error);
+    });
+  };
+};
+
+export var logout = () => {
+  return (dispatch, getState) => {
+    return TodoAPI.logout().then(() => {
+      console.log('Logged out!');
+    }).catch((error) => {
+      console.log('Unable to logout', error);
+    });
+  };
+};

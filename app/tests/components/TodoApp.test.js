@@ -5,7 +5,7 @@ import TestUtils from 'react-addons-test-utils';
 import uuid from 'uuid';
 // const configureStore = require('configureStore');
 import {configure} from 'configureStore';
-import TodoApp from 'TodoApp';
+import {TodoApp} from 'TodoApp';
 import TodoList from 'TodoList';
 
 describe('components/TodoApp', () => {

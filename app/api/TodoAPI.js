@@ -1,4 +1,4 @@
-import firebase, {firebaseRef} from 'configureFirebase';
+import firebase, {firebaseRef, githubProvider} from 'configureFirebase';
 import moment from 'moment';
 // This is not a React component.
 // This just a set of methods that we can call to get and save todos to localStorage.
@@ -70,6 +70,20 @@ export default {
     }
     return todoRef.update(updates).then(() => {
       return updates;
+    }).catch((error) => {
+      return error;
+    });
+  },
+  loginWithGithub: () => {
+    return firebase.auth().signInWithPopup(githubProvider).then((result) => {
+      return result;
+    }).catch((error) => {
+      return error;
+    });
+  },
+  logout: () => {
+    return firebase.auth().signOut().then(() => {
+      return true;
     }).catch((error) => {
       return error;
     });

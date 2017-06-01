@@ -11,6 +11,7 @@ try {
 } catch (error) {
   console.log('firebase.initializeApp failed.');
 }
-
+// githubProvider is used in TodoAPI
+export var githubProvider = new firebase.auth.GithubAuthProvider();
 export var firebaseRef = firebase.database().ref();
 export default firebase;
