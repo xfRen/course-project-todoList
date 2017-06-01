@@ -439,3 +439,47 @@ $$$47. For the moment, we only have one database.
 This means our app and our tests run on the same database which is a bad idea for the reason you mentioned above.
 This is temporary.
 In a few videos we'll create a separate test database so our tests don't interfere without our production user data!
+
+$$$48. Setup environment variable NODE_ENV for testing
+On MAC, the below script will work:
+"test": "NODE_ENV=test karma start"
+
+On Windows, it needs to be this:
+"test": "SET NODE_ENV=test&& karma start"
+
+$$$49. The purpose of using environment variables:
+We used environment variables to allow us to easily swap between production, development, and test databases.
+The goal was never to hide them.
+Anytime you have something that changes depending on the environment (prod, dev, test)
+it's best to pull it out into an environment variable that can easily be changed.
+
+The client-side environment variables are still indeed readable from the bundle.
+That'll always be the case.
+The goal here wasn't to hide them.
+The goal here was to abstract them out of the code and into a config where we can setup multiple environments.
+
+$$$50. Getting warning in Chrome console:
+You are currently using minified code outside of NODE_ENV === 'production'.
+This means that you are running a slower development build of Redux.
+You can use loose-envify (https://github.com/zertosh/loose-envify) for browserify or
+DefinePlugin for webpack (http://stackoverflow.com/questions/30030031) to ensure you have the correct code for your production build.
+
+Comments from Andrew:
+The warning is coming up because we're using the uglify plugin in development.
+React is concerned that our env vars are not set correctly, even though they are.
+It sees a minified file (which is usually done in production) and it sees NODE_ENV is not set to production.
+This causes the warning.
+You can safely ignore it or disable uglify when NODE_ENV is not set to production.
+
+Comments from stackoverflow: https://stackoverflow.com/questions/38865262/why-webpack-gives-an-error-for-about-node-env
+The warning you get now is because you are letting Webpack minify your build, but you are still setting NODE_ENV to development.
+If you use UglifyJsPlugin you should always set NODE_ENV to production.
+If you're not building for production, remove UglifyJsPlugin to not get any warnings.
+Webpack, React and Redux try to give you some best practice hints here.
+In development mode (NODE_ENV not set to production), they all give more warnings and have lower performance.
+When you minify them they assume you're running a production build.
+For production builds, they really expect NODE_ENV to be set correctly.
+
+So in short:
+Production builds: set NODE_ENV to production and use UglifyJsPlugin.
+Dev builds: set NODE_ENV to development and don't use any minification plugins.
