@@ -483,3 +483,13 @@ For production builds, they really expect NODE_ENV to be set correctly.
 So in short:
 Production builds: set NODE_ENV to production and use UglifyJsPlugin.
 Dev builds: set NODE_ENV to development and don't use any minification plugins.
+
+$$$51. Use .on() instead of .once() to get the todo list using the realtime features in firebase:
+https://www.udemy.com/the-complete-react-web-app-developer-course/learn/v4/questions/1480996
+
+$$$52. Tips for creating heroku env vars:
+You can add all the necessary variables in one line by separating them with a space:
+
+$ heroku config:set API_KEY=<value> DATABASE_URL=<value> AUTH_DOMAIN=<value>
+
+Obviously you'll have to be careful with the values; you don't wanna end up making mistakes ;-)
