@@ -3,9 +3,7 @@ import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 
 import TodoAPI from 'TodoAPI';
-
 import {configure} from 'configureStore';
-import {fetchTodos} from 'actions';
 import router from 'appRouter';
 require('style!css!sass!appSass');
 
@@ -23,9 +21,7 @@ require('style!css!sass!appSass');
 // var initialTodos = TodoAPI.getTodos();
 // var store = configure({todos: initialTodos});
 var store = configure({});
-store.dispatch(fetchTodos());
-
-TodoAPI.authStateChanged(store);
+TodoAPI.authStateChanged(store); // update data once auth state got changed
 
 // store.subscribe(() => {
 //   var state = store.getState();

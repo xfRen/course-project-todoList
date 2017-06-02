@@ -2,7 +2,7 @@ import firebase, {firebaseRef, githubProvider} from 'configureFirebase';
 import moment from 'moment';
 import {browserHistory} from 'react-router';
 
-import {login, logoutObject} from 'actions';
+import {login, fetchTodos, logoutObject} from 'actions';
 // This is not a React component.
 // This just a set of methods that we can call to get and save todos to localStorage.
 export default {
@@ -27,8 +27,8 @@ export default {
     //   return [];
     // }
   // },
-  getTodos: () => {
-    var todosRef = firebaseRef.child('todos');
+  getTodos: (uid) => {
+    var todosRef = firebaseRef.child(`users/${uid}/todos`);
     return todosRef.once('value').then((snapshot) => {
       if (snapshot !== null && snapshot.val() !== null) {
         var todoObjects = snapshot.val();
@@ -54,8 +54,8 @@ export default {
       return error;
     });
   },
-  addTodo: (todo) => {
-    var todoRef = firebaseRef.child('todos').push(todo);
+  addTodo: (todo, uid) => {
+    var todoRef = firebaseRef.child(`users/${uid}/todos`).push(todo);
     return todoRef.then((snapshot) => {
       return {
         ...todo,
@@ -65,8 +65,8 @@ export default {
       return error;
     });
   },
-  updateTodo: (id, completed) => {
-    var todoRef = firebaseRef.child(`todos/${id}`);
+  updateTodo: (id, completed, uid) => {
+    var todoRef = firebaseRef.child(`users/${uid}/todos/${id}`);
     var updates = {
       completed,
       completedAt: completed ? moment().unix() : null
@@ -93,10 +93,10 @@ export default {
   },
   authStateChanged(store) {
     return firebase.auth().onAuthStateChanged((user) => {
-      console.log('onAuthStateChanged');
       if (user) {
         if (typeof store !== 'undefined' && store !== null) {
           store.dispatch(login(user.uid));
+          store.dispatch(fetchTodos());
         }
         browserHistory.push('/todos');
       } else {

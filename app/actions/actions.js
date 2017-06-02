@@ -61,7 +61,9 @@ export var callAddTodo = (text) => {
       createdAt: moment().unix(),
       completedAt: null
     };
-    return TodoAPI.addTodo(newTodo).then((todo) => {
+    var state = getState();
+    var uid = state.auth.uid;
+    return TodoAPI.addTodo(newTodo, uid).then((todo) => {
       dispatch(addTodo(todo));
     }).catch((error) => {
       if (error) {
@@ -73,8 +75,9 @@ export var callAddTodo = (text) => {
 
 export var callToggleTodo = (id, completed) => {
   return (dispatch, getState) => {
-    // var state = getState(); // getState() can return the state if called
-    return TodoAPI.updateTodo(id, completed).then((updates) => {
+    var state = getState(); // getState() can return the state if called
+    var uid = state.auth.uid;
+    return TodoAPI.updateTodo(id, completed, uid).then((updates) => {
       dispatch(updateTodo(id, updates));
     }).catch((error) => {
       if (error) {
@@ -86,7 +89,9 @@ export var callToggleTodo = (id, completed) => {
 
 export var fetchTodos = () => {
   return (dispatch, getState) => {
-    return TodoAPI.getTodos().then((todos) => {
+    var state = getState();
+    var uid = state.auth.uid;
+    return TodoAPI.getTodos(uid).then((todos) => {
       dispatch(getTodos(todos));
     }).catch((error) => {
       if (error) {
