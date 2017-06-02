@@ -493,3 +493,93 @@ You can add all the necessary variables in one line by separating them with a sp
 $ heroku config:set API_KEY=<value> DATABASE_URL=<value> AUTH_DOMAIN=<value>
 
 Obviously you'll have to be careful with the values; you don't wanna end up making mistakes ;-)
+
+$$$53. Redux.connect()(...):
+This is known as a "higher order component".
+I cover "higher order functions" and "higher order components" in lectures 155 and 156.
+You'll learn all about it, and you'll even learn how to create you own!
+
+$$$54. Question: If I only want to render a component if a user had a specific role,
+for example if I had a posting platform and I wanted role1 to only be able to read posts,
+but role2 to be able to read and write posts.
+The 'write post' component would only be available for the users assigned role2.
+How that would be implemented?
+
+Answer: I would get this done via higher order components.
+It will make it easy to turn any component into a private component.
+It will be covered later in this course.
+In general, a higher order component allows you to hijack a component.
+This is what happens when we call the react-redux connect method.
+
+Here's a sneak peak code sample.
+The below adminComponent function lets us hide/show a component depending on the isAdmin variable.
+If it's false, you'll see nothing.
+If it's true, you'll see the little "Private admin information" message and the actual rendered component.
+
+var isAdmin = false;
+var adminComponent = (WrappedComponent) => {
+  return React.createClass({
+    render: function () {
+      if (isAdmin) {
+        return (
+          <div className="callout secondary">
+            <p className="alert label">Private admin information</p>
+            <WrappedComponent {...this.props} isAdmin={isAdmin}/>
+          </div>
+        );
+      } else {
+        return null;
+      }
+    }
+  })
+}
+
+var Hello = React.createClass({
+  render: function() {
+    return <div>Hello {this.props.name}</div>;
+  }
+});
+
+var AdminHello = adminComponent(Hello)
+
+
+ReactDOM.render(
+  <AdminHello name="World" />,
+  document.getElementById('container')
+);
+
+$$$55.
+You could fix this by waiting to call ReactDOM.render until Firebase responds with the auth status.
+You could even render a loading component right away, then swap it out for the actual app one Firebase responds.
+Another way from a student - use store.getState().auth.synced
+Code from the student:
+// Code on app.jsx (variable router imports from the router):
+try
+{
+    // this is where the firebase.auth().onAuthStateChanged() will execute
+    // which will run the following code only once:
+    // if(!getState().auth.synced) dispatch(authActions.setSynced(true));
+    store.dispatch(FirebaseAuth.startAuthListener());
+}
+catch(e)
+{
+    store.dispatch(FoundationModal.fModalOpen({
+        context: 'error',
+        title: 'ERROR',
+        message: 'An critical error has ocurred. We apologize for the inconvenience. Please contact support right away.\n' + err
+    }));
+}
+
+var appMarkup = (<Provider store={store}> {router} </Provider>);
+
+// Subscribe to the store, listen for state changes and render based on 'synced'
+store.subscribe(() => {
+    var synced = store.getState().auth.synced;
+    if(synced){
+        ReactDOM.render(
+            appMarkup,
+            document.getElementById('app')
+        );
+    }
+    // ELSE statement could go here rendering the 'loading' div!
+});

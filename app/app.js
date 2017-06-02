@@ -1,14 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
-import {Route, Router, IndexRoute, browserHistory} from 'react-router';
 
-import TodoApp from 'TodoApp';
 import TodoAPI from 'TodoAPI';
-import Login from 'Login';
 
 import {configure} from 'configureStore';
-import * as actions from 'actions';
+import {fetchTodos} from 'actions';
+import router from 'appRouter';
 require('style!css!sass!appSass');
 
 // import './../playground/firebase/index';
@@ -25,7 +23,9 @@ require('style!css!sass!appSass');
 // var initialTodos = TodoAPI.getTodos();
 // var store = configure({todos: initialTodos});
 var store = configure({});
-store.dispatch(actions.fetchTodos());
+store.dispatch(fetchTodos());
+
+TodoAPI.authStateChanged();
 
 // store.subscribe(() => {
 //   var state = store.getState();
@@ -34,12 +34,7 @@ store.dispatch(actions.fetchTodos());
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={browserHistory}>
-      <Route path="/">
-        <IndexRoute component={Login}/>
-        <Route path="todos" component={TodoApp}/>
-      </Route>
-    </Router>
+    {router}
   </Provider>,
   document.getElementById('app')
 );

@@ -59,7 +59,8 @@ module.exports = {
       actions: 'app/actions/actions.js',
       reducers: 'app/reducers/reducers.js',
       configureStore: 'app/store/config.js',
-      configureFirebase: 'app/firebase/config.js'
+      configureFirebase: 'app/firebase/config.js',
+      appRouter: 'app/router/config.js'
     },
     extensions: ['', '.jsx', '.js']
   },
