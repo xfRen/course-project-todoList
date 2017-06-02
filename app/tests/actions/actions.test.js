@@ -55,6 +55,23 @@ describe('actions/actions', () => {
     expect(response).toEqual(action);
   });
 
+  it('should generate login action object', () => {
+    var action = {
+      type: 'LOGIN',
+      uid: 'someuid'
+    };
+    var response = actions.login(action.uid);
+    expect(response).toEqual(action);
+  });
+
+  it('should generate logout action object', () => {
+    var action = {
+      type: 'LOGOUT'
+    };
+    var response = actions.logoutObject();
+    expect(response).toEqual(action);
+  });
+
 // Question: Why we need to create a fake store using redux-mock-store, instead of using real store to test the action?
 // Answer: The utility function 'store.getActions()' makes it easy to check what actions were dispatched.
   it('should create todo and dispatch ADD_TODO', (done) => {

@@ -36,6 +36,19 @@ export var getTodos = (todos) => {
   };
 };
 
+export var login = (uid) => {
+  return {
+    type: 'LOGIN',
+    uid
+  };
+};
+
+export var logoutObject = () => {
+  return {
+    type: 'LOGOUT'
+  };
+};
+
 //async action
 export var callAddTodo = (text) => {
   // Dispatch is passed in because we configured redux to use the thunk middleware.

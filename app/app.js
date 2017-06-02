@@ -25,7 +25,7 @@ require('style!css!sass!appSass');
 var store = configure({});
 store.dispatch(fetchTodos());
 
-TodoAPI.authStateChanged();
+TodoAPI.authStateChanged(store);
 
 // store.subscribe(() => {
 //   var state = store.getState();

@@ -1,6 +1,8 @@
 import firebase, {firebaseRef, githubProvider} from 'configureFirebase';
 import moment from 'moment';
 import {browserHistory} from 'react-router';
+
+import {login, logoutObject} from 'actions';
 // This is not a React component.
 // This just a set of methods that we can call to get and save todos to localStorage.
 export default {
@@ -89,11 +91,18 @@ export default {
       return error;
     });
   },
-  authStateChanged() {
+  authStateChanged(store) {
     return firebase.auth().onAuthStateChanged((user) => {
+      console.log('onAuthStateChanged');
       if (user) {
+        if (typeof store !== 'undefined' && store !== null) {
+          store.dispatch(login(user.uid));
+        }
         browserHistory.push('/todos');
       } else {
+        if (typeof store !== 'undefined' && store !== null) {
+          store.dispatch(logoutObject());
+        }
         browserHistory.push('/');
       }
     });
