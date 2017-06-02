@@ -95,6 +95,7 @@ export default {
     return firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         if (typeof store !== 'undefined' && store !== null) {
+          // These actions are processed synchronously so before fetching todos, uid will be ready
           store.dispatch(login(user.uid));
           store.dispatch(fetchTodos());
         }

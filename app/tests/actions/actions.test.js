@@ -72,29 +72,11 @@ describe('actions/actions', () => {
     expect(response).toEqual(action);
   });
 
-// Question: Why we need to create a fake store using redux-mock-store, instead of using real store to test the action?
-// Answer: The utility function 'store.getActions()' makes it easy to check what actions were dispatched.
-  it('should create todo and dispatch ADD_TODO', (done) => {
-    // create an instance of mock store
-    const store = createMockStore({});
-    const todoText = 'My todo item';
-    const action = actions.callAddTodo(todoText);
-    store.dispatch(action).then(() => {
-      const mockActions = store.getActions();
-      expect(mockActions.length).toBe(1);
-      var actualAction = mockActions[0];
-      expect(actualAction).toInclude({
-        type: 'ADD_TODO'
-      });
-      expect(actualAction.todo).toInclude({
-        text: todoText
-      });
-      done();
-    }).catch(done);
-  });
-
   describe('Tests with firebase todos', () => {
     var testTodoRef;
+    var uid;
+    var todosRef;
+
     var testTodo = {
       text: 'todo for testing',
       completed: false,
@@ -102,8 +84,11 @@ describe('actions/actions', () => {
       completedAt: null
     };
     beforeEach((done) => {
-      var todosRef = firebaseRef.child('todos');
-      todosRef.remove().then(() => {
+      firebase.auth().signInAnonymously().then((user) => {
+        uid = user.uid;
+        todosRef = firebaseRef.child(`users/${uid}/todos`);
+        return todosRef.remove();
+      }).then(() => {
         testTodoRef = todosRef.push();
         return testTodoRef.set(testTodo);
       }).then(() => {
@@ -112,13 +97,13 @@ describe('actions/actions', () => {
     });
 
     afterEach((done) => {
-      testTodoRef.remove().then(() => {
+      todosRef.remove().then(() => {
         done();
       }).catch(done);
     });
 
     it('should toggle todo and dispatch UPDATE_TODO action', (done) => {
-      const store = createMockStore({});
+      const store = createMockStore({auth: {uid}});
       var id = testTodoRef.key;
       var completed = true;
       var action = actions.callToggleTodo(id, completed);
@@ -139,7 +124,7 @@ describe('actions/actions', () => {
     });
 
     it('should populate todos and dispatch GET_TODOS', (done) => {
-      const store = createMockStore({});
+      const store = createMockStore({auth: {uid}});
       var action = actions.fetchTodos();
       store.dispatch(action).then(() => {
         const mockActions = store.getActions();
@@ -152,6 +137,27 @@ describe('actions/actions', () => {
         expect(todos.length).toBe(1);
         expect(todos[0]).toInclude({
           text: 'todo for testing'
+        });
+        done();
+      }).catch(done);
+    });
+
+    // Question: Why we need to create a fake store using redux-mock-store, instead of using real store to test the action?
+    // Answer: The utility function 'store.getActions()' makes it easy to check what actions were dispatched.
+    it('should create todo and dispatch ADD_TODO', (done) => {
+      // create an instance of mock store
+      const store = createMockStore({auth: {uid}});
+      const todoText = 'My todo item';
+      const action = actions.callAddTodo(todoText);
+      store.dispatch(action).then(() => {
+        const mockActions = store.getActions();
+        expect(mockActions.length).toBe(1);
+        var actualAction = mockActions[0];
+        expect(actualAction).toInclude({
+          type: 'ADD_TODO'
+        });
+        expect(actualAction.todo).toInclude({
+          text: todoText
         });
         done();
       }).catch(done);
