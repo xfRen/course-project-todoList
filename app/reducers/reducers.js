@@ -38,7 +38,8 @@ export var todosReducer = (todos = [], action) => {
         }
         return todo;
       });
-
+    case 'LOGOUT':
+      return [];
       // Object.assign() also works here:
       // return todos.map((todo) => {
       //   var rTodo = Object.assign({}, todo);

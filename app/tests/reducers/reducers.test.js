@@ -68,6 +68,24 @@ describe('reducers/reducers', () => {
       expect(response[0]).toInclude(updates);
       expect(response[0].text).toBe(todos[0].text);
     });
+
+    it('should clear todos once logged out', () => {
+      var id = uuid();
+      var todos = [
+        {
+          id: id,
+          text: 'Feed QiuQiu',
+          completed: false,
+          createdAt: moment().unix(),
+          completedAt: undefined
+        }
+      ];
+      var action = {
+        type: 'LOGOUT'
+      };
+      var response = reducers.todosReducer(df(todos), df(action));
+      expect(response.length).toBe(0);
+    });
   });
 
   describe('authReducer', () => {
